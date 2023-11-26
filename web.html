@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhoot </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 15px;
+            padding: 5px;
+            background-color: rgb(10, 10, 10);
+        }
+
+        header {
+            background-color: #e72525;
+            color: rgb(17, 16, 16);
+            text-align: center;
+            padding: 20px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        p {
+            line-height: 1.5;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+        }
+
+        /* Navigation Menu Styles */
+        nav {
+            background-color: #121212;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #fcfbfb;
+        }
+
+        th {
+            background-color: #3e3d3d;
+        }
+
+        /* Cast and Crew Styles */
+        .cast-crew {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cast-crew-item {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .cast-crew-item img {
+            max-width: 150px;
+            border-radius: 50%;
+        }
+        
+        /* Search Bar Styles */
+        .search-bar {
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            background-color: #161515;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        
+        /* Reviews Styles */
+        .reviews {
+            margin-top: 20px;
+        }
+
+        .review {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color:  #3e3d3d;
+        }
+
+        .review-author {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Phone Bhoot </h1>
+    </header>
+    
+    <!-- Navigation Menu -->
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#cast">Cast & Crew</a></li>
+            <li><a href="#release">Release Date</a></li>
+            <li><a href="#trailer">Trailer</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+    </nav>
+    <font color="#fff"> 
+    <div class="container" id="about">
+        <img src="https://www.pinkvilla.com/images/2022-10/1567058582_phone-bhoot_1280*720.jpg" alt="Bhoot Movie Poster" width="1120">
+        <!-- Replace "movie_poster.jpg" with the actual path to your movie poster image. -->
+        <div class="container" id="about">
+            <h2>About Bhoot</h2>
+            <p>
+                Bhoot is a supernatural horror movie that will send chills down your spine.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida nulla vel libero consectetur, eu fermentum arcu faucibus.
+            </p>
+            <p>
+                The movie is known for its spine-tingling scares and captivating storytelling. It takes the audience on a terrifying journey into the unknown, exploring the realm of the supernatural.
+            </p>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrqn--RDUzCgYbK0-W5YO65qbCeCKrovbcHQ&usqp=CAU" alt="Image 1" width="300">
+            <!-- Replace "image1.jpg" with the actual path to your image. -->
+            <p>
+                Bhoot is a must-watch for horror enthusiasts, and it has received critical acclaim for its eerie atmosphere and outstanding performances by the cast.
+            </p>
+            <img src="data:image/jpeg;base64,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" alt="Image 2" width="300">
+            <!-- Replace "image2.jpg" with the actual path to your image. -->
+            <img src="https://www.rawneix.in/wp-content/uploads/2022/11/Phone-Bhoot-Movie.jpg" alt="Image 3" width="300">
+            <!-- Replace "image3.jpg" with the actual path to your image. -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiDv_ySzOy4jXFxmelW1a8DbW3JHMdUpHpLA&usqp=CAU" alt="Image 4" width="300">
+            <!-- Replace "image4.jpg" with the actual path to your image. -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-H6lJCArfLDkMLp2-cxiyFwcLOSpL0_w57Pg2heUN4wsdeWbIU4e7TfDWwsUs6Ytr0aI&usqp=CAU" alt="Image 5" width="300">
+            <!-- Replace "image5.jpg" with the actual path to your image. -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmVVNhZvY8p6tRh3PC-NDE-zOW9vR6ROUUPQ&usqp=CAU" alt="Image 6" width="300">
+            <!-- Replace "image6.jpg" with the actual path to your image. -->
+            <img src="https://cdn.bollywoodmdb.com/fit-in/post/IKSCPBCME_1666274012346.jpg" alt="Image 6" width="300">
+            <!-- Replace "image6.jpg" with the actual path to your image. -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnsuURr8_57RlFN7YUEdUUOtzEl_AGdHzhSODzMRtkPtJJjhGnB1ra6QIAUgN78WfReJw&usqp=CAU" alt="Image 6" width="300">
+            <!-- Replace "image6.jpg" with the actual path to your image. -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHafh5DzamtupiI57y9Nazhpk_bWr3Gu6Zjg&usqp=CAU" alt="Image 6" width="300">
+            <!-- Replace "image6.jpg" with the actual path to your image. -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMM_hqLzDeUvybOF9N7jxO5xCr18JxJhSPyQ&usqp=CAU" alt="Image 6" width="300">
+            <!-- Replace "image6.jpg" with the actual path to your image. -->
+        </div>
+        
+    
+
+        <h2 id="trailer">Trailer</h2>
+            <video controls  >
+            <source src="video1.mp4" type="video/mp4"> 
+            <!--<source src="video1.ogg" type="video/ogg">-->
+            </video>
+            
+       
+        <h2 id="cast">Cast and Crew</h2>
+        <div class="cast-crew">
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsr92t4JTuUzp2GIqWyQ9sUC25KiYEZcTL3JF62dZ66ge9y-LRuNn6nB8&s=10" alt="Actor 1">
+                <p>Katrina Kaif</p>
+                <p>(Ragini Maheshwar)</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRs6VVfihOwJT06UCH-Xw-kUl1n0yTcrKAfSIOr2R1_RiOxPFpJ9t5vDVW5ePopvqc2GnEwbnI&s=19" alt="Actor 2">
+                <p>Ishaan Khattar</p>
+                <p>(Gullu)</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRObBf0AFDERozt1WF75eU_zJWD3qgSVDED_SItGt-41Cdlf2j73Ic3ZdE&s=10" alt="Actor 3">
+                <p>Siddhant Chaturvedi</p>
+                <p>(Sherdil Shergill)</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrvtGIJI6t0wBDek0ZY8g5jakU_jQWH1CJ_B1m8eSsRMjnBW0eJS1ivho&s=10" alt="Actor 4">
+                <p>Nidhi Bisht</p>
+                <p>(Lady Diana)</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRi7F6rJk0TWkl46PqaWhHoT56k43oGmKED5_WHTLP5dN72cvqNdLb6Nfr_OR9yCnisqz8PrUA&s=19" alt="Actor 4">
+                <p>Sheeba Chaddha</p>
+                <p>(Chikni Chudail)</p>
+
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsGv5IBiiJ7X7xK0VM8lvovY2nz2v0-e1eEmtg0coMzMCBHBat1yyM4LM&s=10" alt="Actor 4">
+                <p>Jackie Shroff</p>
+                <p>(Atmaram Dhyani)</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXkp-BZqir1IIiwcDzI_pv5ot1O0byGysKgLPQR60&s=10" alt="Actor 4">
+                <p>Vipul Deshpande</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX1_FiFAvesWGvrr-miZ7yA2M5TaX7jyjJfwTG1HuADFkFYQVbGENIMVc&s=10" alt="Actor 4">
+                <p>Pulkit Samrat</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXf7ADqLNNbMAWfm7Ovm9LZyLFAUDqQMZ94k8b3BGb7kdbVGQKAlNpASU&s=10" alt="Actor 4">
+                <p>Varun Sharma</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQm9d7WLaozngHkq7lqhDndu9j3yf1NEGp0H5tQA1I_JwVTl-GGoCxidpAnVKh7iGo4LEYI9QA&s=19" alt="Actor 4">
+                <p>Manjot Singh</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd_OWadGGmVLvvlbQ_dyqT7hINR0ppXXLxY4iQj_aVok9hMVahC4JD&s=0" alt="Actor 4">
+                <p>Manu Rishi Chadda</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ90aNwjMPFTxA5sdz25pDS-7eM1hzMDE_3_l-aSMuRRts8etwnI6Xke-4&s=10" alt="Actor 4">
+                <p>Surender Thakur</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Y2hvp_dVvGl7n0UMn-Maf-CqM_5QhsXQXbltX5QldKdDoR_mJDF0ZCY&s=10" alt="Actor 4">
+                <p>Dipti Lele</p>
+            </div>
+            <div class="cast-crew-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU2lG_tMqdjGdfwd3ML5S9k5yGXwHzKvVmiX8xp4rB44oGQjbS0a8W4HA&s=10" alt="Actor 4">
+                <p>Manuj Sharma</p>
+            </div>
+            <!-- Add more cast and crew members as needed -->
+        </div>
+
+        <h2 id="release">Release Date</h2>
+        <p>Release Date: October 31, 2023</p>
+
+        
+        
+            
+        <!-- Movie Details Table -->
+        <h2>Movie Details</h2>
+        <table>
+            <tr>
+                <th>Genre</th>
+                <td>Horror</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>120 minutes</td>
+            </tr>
+            <tr>
+                <th>Rating</th>
+                <td>4.5/5</td>
+            </tr>
+            <tr>
+                <th>Release Country</th>
+                <td>United States</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>English</td>
+            </tr>
+            <tr>
+                <th>Production Company</th>
+                <td>Example Productions</td>
+            </tr>
+            <tr>
+                <th>Director</th>
+                <td>Gurmmeet Singh</td>
+            </tr>
+            <tr>
+                <th>Writers</th>
+                <td>
+                    Jasvinder BathRavi Shankaran</td>
+            </tr>
+            <tr>
+                <th>Lyrics</th>
+                <td>Kumaar, Baba Sehgal, Tanishk Bagchi</td>
+            </tr>
+            <tr>
+                <th>Singers</th>
+                <td>Baba Sehgal, Rochak Kohli, Lisa Mishra, Zahrah S Khan, Tanishk Bagchi, Romy, Sakshi Holkar</td>
+            </tr>
+            <tr>
+                <th>Art Direction</th>
+                <td>Vintee Bansal</td>
+            </tr>
+            <tr>
+                <th>Stunt Choreography</th>
+                <td>Manohar Verma</td>
+            </tr>
+            <tr>
+                <th>Dance Choreography</th>
+                <td>Ganesh Hegde, Raju Sundaram, Adil Shaikh</td>
+            </tr>
+            <tr>
+                <th>Costume Design</th>
+                <td>	Poornamrita Singh</td>
+            </tr>
+            <tr>
+                <th>Production</th>
+                <td>Excel Entertainment</td>
+            </tr>
+        </table>
+         <!-- Box Office Details Table -->
+         <h2 id="box-office">Box Office Details</h2>
+         <table>
+             <tr>
+                 <th>Box Office Gross</th>
+                 <td>$10 million</td>
+             </tr>
+             <tr>
+                 <th>Opening Weekend</th>
+                 <td>$3 million</td>
+             </tr>
+             <tr>
+                 <th>Worldwide Gross</th>
+                 <td>$20 million</td>
+             </tr>
+             <tr>
+                <th>India box office Nett cr.</th>
+                <td>14.01 cr.</td>
+            </tr>
+            <tr>
+                <th>India box office Gross cr.</th>
+                <td>16.68 cr.</td>
+            </tr>
+            <tr>
+                <th>Overseas Gross cr.</th>
+                <td>2.05 cr.</td>
+            </tr>
+            <tr>
+                <th>Worldwide collections Gross cr.</th>
+                <td>18.73 cr.</td>
+            </tr>
+         </table>
+ 
+         <div class="container" id="reviews">
+            <h2>Reviews</h2>
+            <div class="reviews">
+                <div class="review">
+                    <p class="review-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget urna nec justo bibendum bibendum. Sed finibus risus et pharetra.</p>
+                    <p class="review-author">John Doe</p>
+                </div>
+                <div class="review">
+                    <p class="review-content">Suspendisse potenti. Pellentesque at orci at nulla vestibulum condimentum ac a metus. Sed non orci in turpis.</p>
+                    <p class="review-author">Jane Smith</p>
+                </div>
+                <!-- Add more reviews as needed -->
+                <div class="review">
+                    <p class="review-content">Bhoot is hands down the scariest movie I've ever seen. It gave me nightmares for weeks! Highly recommended for horror fans.</p>
+                    <p class="review-author">Mike Johnson</p>
+                </div>
+                <div class="review">
+                    <p class="review-content">I wasn't sure what to expect from Bhoot, but it exceeded all my expectations. The tension and suspense are masterfully done.</p>
+                    <p class="review-author">Emily Davis</p>
+                </div>
+            </div>
+        </div>
+    <div class="container" id="graph">
+        <h2>Box Office Sales</h2>
+        <canvas id="boxOfficeChart"></canvas>
+    </div>
+    
+     </div>
+    </div></font>
+</body>
+<script>
+    // Get a reference to the canvas element
+    var canvas = document.getElementById('boxOfficeChart');
+
+    // Create a chart
+    var ctx = canvas.getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Opening Weekend', 'Domestic Gross', 'Worldwide Gross'],
+            datasets: [{
+                label: 'Box Office Sales (in millions)',
+                data: [3, 10, 20],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+</html>
